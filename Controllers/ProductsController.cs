@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using FoodApplication.Data;
-using FoodApplication.Models;
+﻿using FoodApplication.Data;
 using FoodApplication.Interface;
+using FoodApplication.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodApplication.Controllers
 {
@@ -25,11 +20,44 @@ namespace FoodApplication.Controllers
 
         // GET: Products
         [Authorize(Policy = "writepolicy")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? pageNumber)
         {
-            return _context.Product != null ?
-                        View(await _context.Product.ToListAsync()) :
-                        Problem("Entity set 'AuthContext.Product'  is null.");
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["PriceSortParm"] = String.IsNullOrEmpty(sortOrder) ? "price_desc" : "";
+            var products = from s in _context.Product
+                           select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.Name.Contains(searchString));
+            }
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewData["CurrentFilter"] = searchString;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    products = products.OrderByDescending(s => s.Name);
+                    break;
+                case "price_desc":
+                    products = products.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    products = products.OrderBy(s => s.Name);
+                    break;
+            }
+            int pageSize = 5;
+            return View(await PaginatedList<ProductResponse>.CreateAsync(products.Select(c => new ProductResponse(c)), pageNumber ?? 1, pageSize));
         }
 
         // GET: Products/Details/5
@@ -48,7 +76,7 @@ namespace FoodApplication.Controllers
                 return NotFound();
             }
 
-            return View(product);
+            return View(new ProductResponse(product));
         }
 
         // GET: Products/Create
@@ -174,7 +202,7 @@ namespace FoodApplication.Controllers
         public async Task<IActionResult> Product(Guid? id)
         {
             var product = await _productService.GetDetailsById(id);
-            return View(product);
+            return View(new ProductResponse(product));
         }
 
     }

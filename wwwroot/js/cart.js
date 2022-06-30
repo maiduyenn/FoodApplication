@@ -50,7 +50,7 @@
                         <h3 class="m-0">${e.name}</h3>
                     </td>
                     <td class="align-middle">
-                        <input type="number" min="1" value="${e.quantity}" />
+                        <input type="number" min="1"  class="form-control" value="${e.quantity}" aria-describedby="basic-addon1">
                     </td>
                     <td class="align-middle"><h3 class="m-0">$${e.price}</h3></td>
                     <td class="align-middle">

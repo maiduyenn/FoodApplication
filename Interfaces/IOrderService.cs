@@ -8,8 +8,7 @@ namespace FoodApplication.Interface
     {
         Task<OrderModel> CreateOrder(OrderRequest Product, ApplicationUser user);
         Task<List<OrderModel>> GetOrdersByUser(ApplicationUser user);
+        Task<List<OrderModel>> GetAllOrders();
         Task<OrderResponse> GetOrderById(string id);
-        Task<List<RankingResponse>> GetRanks();
-        Task<double> Discount(string id);
     }
 }

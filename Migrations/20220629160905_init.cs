@@ -86,13 +86,12 @@ namespace FoodApplication.Migrations
                 name: "Ranks",
                 columns: table => new
                 {
-                    RankId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rank = table.Column<int>(type: "int", nullable: false),
-                    SpentMoney = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Discount = table.Column<double>(type: "float", nullable: false)
+                    RankId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RankName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Value = table.Column<int>(type: "int", nullable: false),
+                    Discount = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpentMoney = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -232,8 +231,8 @@ namespace FoodApplication.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "2c5e174e-3b0e-446f-86af-483d56fd7210", "d4e5b98c-9b80-4cc5-b2b3-9479668f85fc", "Admin", "ADMIN" },
-                    { "2c5e174e-3b0e-446f-86af-483d56fd7211", "ba9701f3-c9c2-4981-b2fb-0f0584e494fd", "User", "USER" }
+                    { "2c5e174e-3b0e-446f-86af-483d56fd7210", "ff62c306-7602-46bd-bc86-7dbfbfc69087", "Admin", "ADMIN" },
+                    { "2c5e174e-3b0e-446f-86af-483d56fd7211", "0cd9b3f4-7136-4993-875a-218faffff8c6", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -241,9 +240,9 @@ namespace FoodApplication.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "8e445865-a24d-4543-a6c6-9443d048cdb7", 0, "085e6004-392c-4c3c-a9ad-f8e2553723b4", null, false, "Duyen", "Nguyen", true, null, null, "DUYEN@GMAIL.COM", "AQAAAAEAACcQAAAAEEWyvN6JafCcPU6BxN5tRrVhvsILw/7wSmv4ckmx3oxuLesBVWteKTZy8VmFFm3KBw==", null, false, "cfec5cc9-c10f-4d08-864d-37a8db04c341", false, "duyen@gmail.com" },
-                    { "8e445865-a24d-4543-a6c6-9443d048cdb8", 0, "409eafe3-623d-4943-8a8e-8d917c8a17be", null, false, "Quyen", "Pham", true, null, null, "QUYEN@GMAIL.COM", "AQAAAAEAACcQAAAAEE+GFruoRizSpM4AS1sEibAaz9v/XWobGndQPEop+TOhWKLzkfvH3bj2zs0EVSj7ug==", null, false, "e9ca6f0e-2f92-4184-a05e-1561c7cec9cd", false, "quyen@gmail.com" },
-                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "fab56371-87eb-4810-b549-ee6317436bcb", null, false, "Admin", "System", true, null, null, "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEKfbS2P/YPcphQm1g9QelMzTRceQXhhnlgijs+PQZREysNGNhSJ6A2KbAuv6jFGutg==", null, false, "25797750-b62b-4756-a26d-19f8005a304f", false, "admin@gmail.com" }
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb7", 0, "35ab49c1-35e7-465a-84aa-9411af3240d2", null, false, "Duyen", "Nguyen", true, null, null, "DUYEN@GMAIL.COM", "AQAAAAEAACcQAAAAEGxy9dFEkZ0bSwggaPtDORHyClxOk+OxmXvx75Sx/NPfLjNDZrUGsucJxoFBVokjyg==", null, false, "87625d79-a4ea-4ab9-9e47-fd0172ca3980", false, "duyen@gmail.com" },
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb8", 0, "083f0025-e26e-43f3-af57-548a5a38983d", null, false, "Quyen", "Pham", true, null, null, "QUYEN@GMAIL.COM", "AQAAAAEAACcQAAAAEP5BRECL7oeIJ6WVX38MUwpjUpHhreE41S2b0DllGyhMFuAQtoC7SaXbM64xGOQ6Rg==", null, false, "74039707-7908-4544-8794-66d2984f08c3", false, "quyen@gmail.com" },
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "851e3114-878b-4316-9abf-abf604666eee", null, false, "Admin", "System", true, null, null, "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEK+Q3gsyyR8QTM3Dcd/Bc9QvM1VT3jkkhriunEsXkC3SGgDs7psgDN4tLEPJYFuzoQ==", null, false, "200c1e8e-9062-4451-a630-2e14880bccfe", false, "admin@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -251,16 +250,16 @@ namespace FoodApplication.Migrations
                 columns: new[] { "ProductId", "Description", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("0c5fe554-59e5-4a3c-bd4e-9459a9ba6ef9"), "Pizza Hải Sản loại 3 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate3.png", "Pizza siêu ngon số 3 thế giới", 15m },
-                    { new Guid("35078b9d-5afb-4260-b73a-238220101599"), "Pizza Hải Sản loại 1 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate1.png", "Pizza siêu ngon số 1 thế giới", 13m },
-                    { new Guid("38442abb-2abf-4af7-8d1b-3e85508f6cab"), "Pizza Hải Sản loại 5 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate5.png", "Pizza siêu ngon số 5 thế giới", 17m },
-                    { new Guid("47bd5063-899e-4e9d-b4d0-28e2e855119c"), "Pizza Hải Sản loại 6 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate6.png", "Pizza siêu ngon số 6 thế giới", 18m },
-                    { new Guid("56f4dd2a-d11d-4444-905f-8207c07e8d56"), "Pizza Hải Sản loại 4 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate4.png", "Pizza siêu ngon số 4 thế giới", 16m },
-                    { new Guid("6dfc5935-be7a-4d35-833d-621352286a4f"), "Pizza Hải Sản loại 7 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate7.png", "Pizza siêu ngon số 7 thế giới", 19m },
-                    { new Guid("6eed8b36-89c7-4dbc-868f-d776aaf53bbe"), "Pizza Hải Sản loại 2 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate2.png", "Pizza siêu ngon số 2 thế giới", 14m },
-                    { new Guid("7241f38c-702e-4d00-9ead-208f984a912a"), "Pizza Hải Sản loại 0 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate0.png", "Pizza siêu ngon số 0 thế giới", 12m },
-                    { new Guid("7987dd14-a136-4bfa-b0ae-80c34e7906ed"), "Pizza Hải Sản loại 9 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate9.png", "Pizza siêu ngon số 9 thế giới", 21m },
-                    { new Guid("c13bc38e-da68-46e3-9c3e-2f1e36f7253c"), "Pizza Hải Sản loại 8 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate8.png", "Pizza siêu ngon số 8 thế giới", 20m }
+                    { new Guid("01810684-d544-4acb-b09d-e082ebd349f4"), "Pizza Hải Sản loại 5 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate5.png", "Pizza siêu ngon số 5 thế giới", 17m },
+                    { new Guid("5c02fc75-8158-41c3-9e10-11684c7a22b9"), "Pizza Hải Sản loại 7 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate7.png", "Pizza siêu ngon số 7 thế giới", 19m },
+                    { new Guid("678028ca-d2a6-4d00-9edd-1645a961568c"), "Pizza Hải Sản loại 3 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate3.png", "Pizza siêu ngon số 3 thế giới", 15m },
+                    { new Guid("91ddb623-9125-4e36-b3eb-e2ef92e9070f"), "Pizza Hải Sản loại 1 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate1.png", "Pizza siêu ngon số 1 thế giới", 13m },
+                    { new Guid("97fb1ce6-6082-4017-9fb2-640d57fe4939"), "Pizza Hải Sản loại 2 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate2.png", "Pizza siêu ngon số 2 thế giới", 14m },
+                    { new Guid("a230a125-e905-43e5-8d10-f38d255193f9"), "Pizza Hải Sản loại 6 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate6.png", "Pizza siêu ngon số 6 thế giới", 18m },
+                    { new Guid("bf6acadf-6f2b-40ae-960b-acb7f2c9c33e"), "Pizza Hải Sản loại 0 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate0.png", "Pizza siêu ngon số 0 thế giới", 12m },
+                    { new Guid("e594383f-c6a5-4891-bd6c-d6c88d9c8dbc"), "Pizza Hải Sản loại 9 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate9.png", "Pizza siêu ngon số 9 thế giới", 21m },
+                    { new Guid("ea6f95fc-69f8-439a-94d6-aef887723c9c"), "Pizza Hải Sản loại 4 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate4.png", "Pizza siêu ngon số 4 thế giới", 16m },
+                    { new Guid("ece8b6a6-e45d-4a24-912e-7591e283ecef"), "Pizza Hải Sản loại 8 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.", "/images/plate8.png", "Pizza siêu ngon số 8 thế giới", 20m }
                 });
 
             migrationBuilder.InsertData(

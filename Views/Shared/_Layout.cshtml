@@ -20,11 +20,11 @@
     <header>
         <div class="container-fluid">
             <nav class="mobile-nav">
-                <div class="row">
+                <div class="row" style="display:flex; justify-content:space-around">
                     <div class="col-3">
                         <a href="#"><p>Tasty</p></a>
                     </div>
-                    <div class="col-2 menu-icon">
+                    <div class="col-2 menu-icon" style="margin-left:auto">
                         <i class="fas fa-align-justify"></i>
                     </div>
                 </div>
@@ -36,9 +36,23 @@
                             <div class="col-4">
                                 <i class="far fa-user-circle"></i>
                             </div>
-                            <div class="col-8">
-                                <p><a href="#">Sign in</a> / <a href="#">Sign up</a></p>
-                            </div>
+                            @if (!SignInManager.IsSignedIn(User))
+                            {
+                                <div class="col-8">
+                                    <p>
+                                        <a asp-area="Identity" asp-page="/Account/Login">Login</a> /
+                                        <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+                                    </p>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-8">
+                                    <p style="font-size:14px; text-align:left;">@User.Identity?.Name</p>
+                                </div>
+                            }
+                            }
+
                         </div>
                         <ul class="menu">
                             <li class="home-menu"><a href="/Home/index">Home</a></li>
@@ -47,6 +61,18 @@
                                 <a href="/home/menu">Menu</a>
                             </li>
                             <li class="contact-menu"><a href="#">Contact us</a></li>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li class="about-menu"><a href="/Identity/Account/manage">Profile</a></li>
+                                <li class="about-menu"><a href="/Order/orderhistory">Order History</a></li>
+                                <li class="about-menu"><a href="/Report">Sales Report</a> </li>
+                                <li class="about-menu"><a href="/Products/">Product Manage</a></li>
+                                <li class="about-menu">
+                                    <form style="padding:15px 30px;" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <button type="submit" class="btn btn-danger">Logout</button>
+                                    </form>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -96,16 +122,15 @@
                                         @User.Identity?.Name!
                                     </a>
                                     <div style="margin-left: 50px; top: 42px;" id="options" class="dropdown-menu dropdown-menu-right">
-                                         <a class="dropdown-item" href="/Identity/Account/manage">Profile</a>
+                                        <a class="dropdown-item" href="/Identity/Account/manage">Profile</a>
                                         <a class="dropdown-item" href="/Order/orderhistory">Order History</a>
-                                           <a class="dropdown-item" href="/Report">Sales Report</a>
+                                        <a class="dropdown-item" href="/Report">Sales Report</a>
                                         <a class="dropdown-item" href="/Products/">Product Manage</a>
-                                        <a id="logoutbtn" class="dropdown-item">Logout</a>
+                                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                                            <button type="submit" class="nav-link btn btn-link text-dark dropdown-item">Logout</button>
+                                        </form>
                                     </div>
                                 </li>
-                                <form hidden class="form-inline hide" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                                    <button type="submit" id="logout" class="nav-link btn btn-link text-dark">Logout</button>
-                                </form>
                             }
 
                         </ul>
@@ -188,9 +213,7 @@
         $("#useroption").on("click", function() {
             $("#options").addClass("show");
         });
-        $("#logoutbtn").on("click", function() {
-            $("#logout").click();
-        })</script>
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

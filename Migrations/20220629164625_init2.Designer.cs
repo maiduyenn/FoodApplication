@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodApplication.Migrations
 {
     [DbContext(typeof(AuthContext))]
-    [Migration("20220624151641_init")]
-    partial class init
+    [Migration("20220629164625_init2")]
+    partial class init2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,15 +101,15 @@ namespace FoodApplication.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fab56371-87eb-4810-b549-ee6317436bcb",
+                            ConcurrencyStamp = "9950ff9c-3353-4c45-97a8-3d5491a54fda",
                             EmailConfirmed = false,
                             FirstName = "Admin",
                             LastName = "System",
                             LockoutEnabled = true,
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKfbS2P/YPcphQm1g9QelMzTRceQXhhnlgijs+PQZREysNGNhSJ6A2KbAuv6jFGutg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPLUcHk23IBMnFFrd1c9VF7X3FRJpOY6EVE4AkYxFVryROxo8CHky56vLrhv1/yoZw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "25797750-b62b-4756-a26d-19f8005a304f",
+                            SecurityStamp = "c5666f9f-fc48-42b3-844e-9d199d2a55a8",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -117,15 +117,15 @@ namespace FoodApplication.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "085e6004-392c-4c3c-a9ad-f8e2553723b4",
+                            ConcurrencyStamp = "a4ba25e1-8560-4cc1-bdac-d8927c0e5079",
                             EmailConfirmed = false,
                             FirstName = "Duyen",
                             LastName = "Nguyen",
                             LockoutEnabled = true,
                             NormalizedUserName = "DUYEN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEWyvN6JafCcPU6BxN5tRrVhvsILw/7wSmv4ckmx3oxuLesBVWteKTZy8VmFFm3KBw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENJ0Ic6g/hWGCEVzumXyYnLbhn0tMhCdZjeFFwlK/0VhdJ9sxtP9ffCgSlSlnoMmAg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cfec5cc9-c10f-4d08-864d-37a8db04c341",
+                            SecurityStamp = "579d4e26-14df-4625-b856-4e4124013a50",
                             TwoFactorEnabled = false,
                             UserName = "duyen@gmail.com"
                         },
@@ -133,15 +133,15 @@ namespace FoodApplication.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "409eafe3-623d-4943-8a8e-8d917c8a17be",
+                            ConcurrencyStamp = "3c7e5dd9-b3d5-442d-8254-58ff3e79d5f8",
                             EmailConfirmed = false,
                             FirstName = "Quyen",
                             LastName = "Pham",
                             LockoutEnabled = true,
                             NormalizedUserName = "QUYEN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE+GFruoRizSpM4AS1sEibAaz9v/XWobGndQPEop+TOhWKLzkfvH3bj2zs0EVSj7ug==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGPkjHY233kpKUoh+P6gdT78+DyhsBnQSbxRyP9rX+I9AAY2j+8PGSOc4/rH2UOGxA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e9ca6f0e-2f92-4184-a05e-1561c7cec9cd",
+                            SecurityStamp = "41c7d8f5-4f0a-489c-92c2-d31013143be5",
                             TwoFactorEnabled = false,
                             UserName = "quyen@gmail.com"
                         });
@@ -230,7 +230,7 @@ namespace FoodApplication.Migrations
                     b.HasData(
                         new
                         {
-                            ProductId = new Guid("7241f38c-702e-4d00-9ead-208f984a912a"),
+                            ProductId = new Guid("ac841026-b8ff-446a-911f-039cfc14b6f7"),
                             Description = "Pizza Hải Sản loại 0 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.",
                             ImageUrl = "/images/plate0.png",
                             Name = "Pizza siêu ngon số 0 thế giới",
@@ -238,7 +238,7 @@ namespace FoodApplication.Migrations
                         },
                         new
                         {
-                            ProductId = new Guid("35078b9d-5afb-4260-b73a-238220101599"),
+                            ProductId = new Guid("a489e2a5-fe0f-4056-90a0-f3f58c76653f"),
                             Description = "Pizza Hải Sản loại 1 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.",
                             ImageUrl = "/images/plate1.png",
                             Name = "Pizza siêu ngon số 1 thế giới",
@@ -246,7 +246,7 @@ namespace FoodApplication.Migrations
                         },
                         new
                         {
-                            ProductId = new Guid("6eed8b36-89c7-4dbc-868f-d776aaf53bbe"),
+                            ProductId = new Guid("101370c6-df29-43d6-8af1-beb2b1def226"),
                             Description = "Pizza Hải Sản loại 2 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.",
                             ImageUrl = "/images/plate2.png",
                             Name = "Pizza siêu ngon số 2 thế giới",
@@ -254,7 +254,7 @@ namespace FoodApplication.Migrations
                         },
                         new
                         {
-                            ProductId = new Guid("0c5fe554-59e5-4a3c-bd4e-9459a9ba6ef9"),
+                            ProductId = new Guid("f07ac05e-f132-4d22-b72c-9b0d4a40525d"),
                             Description = "Pizza Hải Sản loại 3 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.",
                             ImageUrl = "/images/plate3.png",
                             Name = "Pizza siêu ngon số 3 thế giới",
@@ -262,7 +262,7 @@ namespace FoodApplication.Migrations
                         },
                         new
                         {
-                            ProductId = new Guid("56f4dd2a-d11d-4444-905f-8207c07e8d56"),
+                            ProductId = new Guid("284587a9-9189-4c4f-86e1-81f12f04dd0a"),
                             Description = "Pizza Hải Sản loại 4 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.",
                             ImageUrl = "/images/plate4.png",
                             Name = "Pizza siêu ngon số 4 thế giới",
@@ -270,7 +270,7 @@ namespace FoodApplication.Migrations
                         },
                         new
                         {
-                            ProductId = new Guid("38442abb-2abf-4af7-8d1b-3e85508f6cab"),
+                            ProductId = new Guid("e852c4aa-1b14-403d-a2a5-00f3eee98284"),
                             Description = "Pizza Hải Sản loại 5 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.",
                             ImageUrl = "/images/plate5.png",
                             Name = "Pizza siêu ngon số 5 thế giới",
@@ -278,7 +278,7 @@ namespace FoodApplication.Migrations
                         },
                         new
                         {
-                            ProductId = new Guid("47bd5063-899e-4e9d-b4d0-28e2e855119c"),
+                            ProductId = new Guid("6c7b65e4-0951-4da9-9398-dac61df942e4"),
                             Description = "Pizza Hải Sản loại 6 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.",
                             ImageUrl = "/images/plate6.png",
                             Name = "Pizza siêu ngon số 6 thế giới",
@@ -286,7 +286,7 @@ namespace FoodApplication.Migrations
                         },
                         new
                         {
-                            ProductId = new Guid("6dfc5935-be7a-4d35-833d-621352286a4f"),
+                            ProductId = new Guid("e6c30fe5-3af1-4f32-bffc-f2eab050cb30"),
                             Description = "Pizza Hải Sản loại 7 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.",
                             ImageUrl = "/images/plate7.png",
                             Name = "Pizza siêu ngon số 7 thế giới",
@@ -294,7 +294,7 @@ namespace FoodApplication.Migrations
                         },
                         new
                         {
-                            ProductId = new Guid("c13bc38e-da68-46e3-9c3e-2f1e36f7253c"),
+                            ProductId = new Guid("f8d834c7-bfcf-4ff5-9db3-6b86fa592785"),
                             Description = "Pizza Hải Sản loại 8 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.",
                             ImageUrl = "/images/plate8.png",
                             Name = "Pizza siêu ngon số 8 thế giới",
@@ -302,7 +302,7 @@ namespace FoodApplication.Migrations
                         },
                         new
                         {
-                            ProductId = new Guid("7987dd14-a136-4bfa-b0ae-80c34e7906ed"),
+                            ProductId = new Guid("419f5ff7-f658-4e70-be59-fbd56e36bbc4"),
                             Description = "Pizza Hải Sản loại 9 Xốt Pesto Với Hải Sản (Tôm, Mực) Nhân Đôi Cùng Với Nấm Trên Nền Xốt Pesto Đặc Trưng, Phủ Phô Mai Mozzarella Từ New Zealand Và Quế Tây.",
                             ImageUrl = "/images/plate9.png",
                             Name = "Pizza siêu ngon số 9 thế giới",
@@ -310,32 +310,33 @@ namespace FoodApplication.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FoodApplication.Models.Ranking", b =>
+            modelBuilder.Entity("FoodApplication.Models.UserRank", b =>
                 {
-                    b.Property<int>("RankId")
+                    b.Property<int>("UserRankId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RankId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserRankId"), 1L, 1);
 
-                    b.Property<double>("Discount")
+                    b.Property<double?>("Discount")
                         .HasColumnType("float");
 
-                    b.Property<int>("Rank")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("RankId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("SpentMoney")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
+                    b.Property<string>("RankName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
+                    b.Property<double?>("TotalSpent")
+                        .HasColumnType("float");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("RankId");
+                    b.HasKey("UserRankId");
 
                     b.ToTable("Ranks");
                 });
@@ -370,14 +371,14 @@ namespace FoodApplication.Migrations
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "d4e5b98c-9b80-4cc5-b2b3-9479668f85fc",
+                            ConcurrencyStamp = "aeca2508-8f5c-41e1-b9fa-46135ff2d3ce",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
-                            ConcurrencyStamp = "ba9701f3-c9c2-4981-b2fb-0f0584e494fd",
+                            ConcurrencyStamp = "7514831f-79ca-4a5e-9344-278f717f29a3",
                             Name = "User",
                             NormalizedName = "USER"
                         });

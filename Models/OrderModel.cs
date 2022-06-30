@@ -40,6 +40,8 @@ namespace FoodApplication.Models
         public string? CustomerAddress { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Notes { get; set; }
+        public decimal? Total { get; set; }
+        public double? Discount { get; set; }
         public virtual ICollection<OrderDetailResponse> OrderDetails { get; set; }
 
         public OrderResponse(OrderModel order)
@@ -57,6 +59,12 @@ namespace FoodApplication.Models
                 {
                     return new OrderDetailResponse(c);
                 }).ToList();
+                Discount = order.OrderDetails?.First().Discount;
+                Total = order.OrderDetails
+                  .Sum(c =>
+                  {
+                      return c.Quantity * c.UnitPrice;
+                  });
             }
         }
     }

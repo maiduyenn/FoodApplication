@@ -34,16 +34,17 @@ namespace FoodApplication.Services
             {
                 await SaveOrderDetail(arg, order);
             }
-            if (_context.Ranks.Any(c => c.UserId == currentUser.Id))
+            if (_context.UserRank.Any(c => c.UserId.ToString() == currentUser.Id))
             {
-                var existingRank = await _context.Ranks.FirstOrDefaultAsync(c => c.UserId == currentUser.Id);
-                existingRank.SpentMoney += arg.TotalPrice;
-                existingRank.GetRank();
+                var existingRank = await _context.UserRank.FirstOrDefaultAsync(c => c.UserId.ToString() == currentUser.Id);
+                existingRank.TotalSpent += arg.TotalPrice;
+                await UpdateRank(existingRank);
                 _context.Update(existingRank);
             }
             else
             {
-                await _context.AddAsync(new Ranking { UserName = currentUser.UserName, UserId = currentUser.Id, SpentMoney = arg.TotalPrice, Rank = Rank.Broze });
+                var rank = CheckRank(arg.TotalPrice);
+                await _context.AddAsync(new UserRank { UserId = new Guid(currentUser.Id), TotalSpent = arg.TotalPrice, RankId = rank.Result.RankId });
             }
             await _context.SaveChangesAsync();
             return order;
@@ -62,6 +63,12 @@ namespace FoodApplication.Services
             await _context.AddRangeAsync(listOderdetails);
         }
 
+        public async Task<List<OrderModel>> GetAllOrders()
+        {
+            var orders = await _context.Orders
+             .Select(c => new OrderModel(c)).ToListAsync();
+            return orders;
+        }
         public async Task<List<OrderModel>> GetOrdersByUser(ApplicationUser currentUser)
         {
             var orders = await _context.Orders
@@ -86,25 +93,56 @@ namespace FoodApplication.Services
             return oderResponse;
         }
 
-        public async Task<List<RankingResponse>> GetRanks()
+        public async Task UpdateRank(UserRank userRank)
         {
-            return await _context.Ranks.OrderByDescending(c => c.Rank).Select(c => new RankingResponse(c)).ToListAsync();
+            var ranks = await _context.Ranking.ToListAsync();
+            Ranking rank = new Ranking();
+            foreach (var item in ranks)
+            {
+                if (userRank.TotalSpent > item.TotalSpent)
+                {
+                    rank = item;
+                }
+            }
+            userRank.RankId = rank.RankId;
+            userRank.RankName = rank.RankName;
+            userRank.Discount = rank.Discount;
         }
 
-        public async Task<double> Discount(string id)
+        public async Task<Ranking> CheckRank(decimal total)
         {
-            try
+            var ranks = await _context.Ranking.ToListAsync();
+            Ranking rank = new Ranking();
+            foreach (var item in ranks)
             {
-                var rank = await _context.Ranks.FirstAsync(c => c.UserId == id);
-                return rank.GetDiscount();
+                if (total > item.TotalSpent)
+                {
+                    rank = item;
+                }
             }
-            catch (Exception e)
-            {
-                return 0;
-            }
+            return rank;
         }
 
-      
+
+        //public async Task<List<RankingResponse>> GetRanks()
+        //{
+        //    return await _context.Ranks.OrderByDescending(c => c.Rank).Select(c => new RankingResponse(c)).ToListAsync();
+        //}
+
+        //public async Task<double> Discount(string id)
+        //{
+        //    try
+        //    {
+        //        var rank = await _context.Ranks.FirstAsync(c => c.UserId == id);
+        //        return rank.GetDiscount();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return 0;
+        //    }
+        //}
+
+
     }
 }
 

@@ -28,7 +28,7 @@ namespace FoodApplication.Controllers
         public async Task<IActionResult> Menu()
         {
             var products = await _productService.GetListProduct();
-            return View(products.AsEnumerable());
+            return View(products.Select(c=>new ProductResponse(c)).AsEnumerable());
         }
 
         public IActionResult Cart()

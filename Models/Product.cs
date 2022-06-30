@@ -16,18 +16,27 @@ namespace FoodApplication.Models
     }
     public class ProductResponse
     {
+        public Guid ProductId { get; set; }
         public string? Name { get; set; }
         public string? ImageUrl { get; set; }
 
         public string? Description { get; set; }
         public decimal? Price { get; set; }
 
+        public decimal? Normalize(decimal? value)
+        {
+            return value / 1.000000000000000000000000000000000m;
+        }
+
         public ProductResponse(Product product)
         {
+            ProductId = product.ProductId;
             Name = product.Name;
             ImageUrl = product.ImageUrl;
             Description = product.Description;
-            Price = product.Price;
+            Price = Normalize(product.Price);
         }
+
+
     }
 }

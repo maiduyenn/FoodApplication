@@ -1,5 +1,6 @@
 ﻿using FoodApplication.Areas.Identity.Data;
 using FoodApplication.Interface;
+using FoodApplication.Models;
 using FoodApplication.Models.Requests;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,8 +21,8 @@ namespace FoodApplication.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
-                var discount = await _orderService.Discount(user.Id);
-                ViewBag.discount = discount;
+                //var discount = await _orderService.Discount(user.Id);
+                ViewBag.discount = 1;
                 return View();
             }
             else
@@ -33,7 +34,16 @@ namespace FoodApplication.Controllers
         public async Task<IActionResult> OrderHistory()
         {
             var user = await _userManager.GetUserAsync(User);
-            var orders = await _orderService.GetOrdersByUser(user);
+            var roles = await _userManager.GetRolesAsync(user);
+            var orders = new List<OrderModel>();
+            if (roles.Contains("Admin")){
+                orders = await _orderService.GetAllOrders();
+            }
+            else
+            {
+                orders = await _orderService.GetOrdersByUser(user);
+            }
+
             return View(orders);
         }
 
@@ -56,10 +66,10 @@ namespace FoodApplication.Controllers
                 return Ok(new { Status = false, message = e.Message });
             }
         }
-        public async Task<IActionResult> Ranking()
-        {
-            var rankings = await _orderService.GetRanks();
-            return View(rankings);
-        }
+        //public async Task<IActionResult> Ranking()
+        //{
+        //    var rankings = await _orderService.GetRanks();
+        //    return View(rankings);
+        //}
     }
 }

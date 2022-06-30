@@ -18,7 +18,7 @@
                                 <td>
                                     <p>${e.quantity}</p>
                                 </td>
-                                <td><p>${e.price}</p></td>
+                                <td><p>$${e.price}</p></td>
 
                             </tr>`);
         })
