@@ -21,8 +21,8 @@ namespace FoodApplication.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
-                //var discount = await _orderService.Discount(user.Id);
-                ViewBag.discount = 1;
+                var discount = await _orderService.Discount(user.Id);
+                ViewBag.discount = discount;
                 return View();
             }
             else
@@ -66,10 +66,11 @@ namespace FoodApplication.Controllers
                 return Ok(new { Status = false, message = e.Message });
             }
         }
-        //public async Task<IActionResult> Ranking()
-        //{
-        //    var rankings = await _orderService.GetRanks();
-        //    return View(rankings);
-        //}
+
+        public async Task<IActionResult> Ranking()
+        {
+            var rankings = await _orderService.GetRanks();
+            return View(rankings);
+        }
     }
 }

@@ -25,13 +25,17 @@ namespace FoodApplication.Models
         public double? Discount { get; set; }
         public virtual Product Product { get; set; }
 
+        public decimal? Normalize(decimal? value)
+        {
+            return value / 1.000000000000000000000000000000000m;
+        }
         public OrderDetailResponse(OrderDetailModel order)
         {
             OrderDetailId = order.OrderDetailId;
             OrderId = order.OrderId;
             ProductId = order.ProductId;
             Quantity = order.Quantity;
-            UnitPrice = order.UnitPrice;
+            UnitPrice = Normalize(order.UnitPrice);
             Discount = order.Discount;
         }
     }

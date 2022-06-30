@@ -25,6 +25,11 @@ namespace FoodApplication.Services
              .Select(c => new OrderResponse(c)).ToListAsync();
             return orders;
         }
+
+        public async Task<ReportTarget> GetTarget()
+        {
+            return await _context.ReportTarget.FirstAsync();
+        }
     }
 }
 

@@ -7,92 +7,90 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FoodApplication.Data;
 using FoodApplication.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace FoodApplication.Controllers
 {
-    [Authorize(Policy = "writepolicy")]
-    public class RankingsController : Controller
+    public class ReportTargetsController : Controller
     {
         private readonly AuthContext _context;
 
-        public RankingsController(AuthContext context)
+        public ReportTargetsController(AuthContext context)
         {
             _context = context;
         }
 
-        // GET: Rankings
+        // GET: ReportTargets
         public async Task<IActionResult> Index()
         {
-            return _context.Ranking != null ?
-                        View(await _context.Ranking.ToListAsync()) :
-                        Problem("Entity set 'AuthContext.Ranking'  is null.");
+              return _context.ReportTarget != null ? 
+                          View(await _context.ReportTarget.ToListAsync()) :
+                          Problem("Entity set 'AuthContext.ReportTarget'  is null.");
         }
 
-        // GET: Rankings/Details/5
+        // GET: ReportTargets/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
-            if (id == null || _context.Ranking == null)
+            if (id == null || _context.ReportTarget == null)
             {
                 return NotFound();
             }
 
-            var ranking = await _context.Ranking
-                .FirstOrDefaultAsync(m => m.RankId == id);
-            if (ranking == null)
+            var reportTarget = await _context.ReportTarget
+                .FirstOrDefaultAsync(m => m.TargetId == id);
+            if (reportTarget == null)
             {
                 return NotFound();
             }
 
-            return View(ranking);
+            return View(reportTarget);
         }
 
-        // GET: Rankings/Create
+        // GET: ReportTargets/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Rankings/Create
+        // POST: ReportTargets/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RankId,RankName,Value,Discount,UserId,TotalSpent")] Ranking ranking)
+        public async Task<IActionResult> Create([Bind("TargetId,Target")] ReportTarget reportTarget)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(ranking);
+                _context.Add(reportTarget);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ranking);
+            return View(reportTarget);
         }
 
-        // GET: Rankings/Edit/5
+        // GET: ReportTargets/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
-            if (id == null || _context.Ranking == null)
+            if (id == null || _context.ReportTarget == null)
             {
                 return NotFound();
             }
 
-            var ranking = await _context.Ranking.FindAsync(id);
-            if (ranking == null)
+            var reportTarget = await _context.ReportTarget.FindAsync(id);
+            if (reportTarget == null)
             {
                 return NotFound();
             }
-            return View(ranking);
+            return View(reportTarget);
         }
 
-        // POST: Rankings/Edit/5
+        // POST: ReportTargets/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid? id, [Bind("RankId,RankName,Value,Discount,UserId,TotalSpent")] Ranking ranking)
+        public async Task<IActionResult> Edit(Guid? id, [Bind("TargetId,Target")] ReportTarget reportTarget)
         {
-            if (id != ranking.RankId)
+            if (id != reportTarget.TargetId)
             {
                 return NotFound();
             }
@@ -101,12 +99,12 @@ namespace FoodApplication.Controllers
             {
                 try
                 {
-                    _context.Update(ranking);
+                    _context.Update(reportTarget);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RankingExists(ranking.RankId))
+                    if (!ReportTargetExists(reportTarget.TargetId))
                     {
                         return NotFound();
                     }
@@ -117,49 +115,49 @@ namespace FoodApplication.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(ranking);
+            return View(reportTarget);
         }
 
-        // GET: Rankings/Delete/5
+        // GET: ReportTargets/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
-            if (id == null || _context.Ranking == null)
+            if (id == null || _context.ReportTarget == null)
             {
                 return NotFound();
             }
 
-            var ranking = await _context.Ranking
-                .FirstOrDefaultAsync(m => m.RankId == id);
-            if (ranking == null)
+            var reportTarget = await _context.ReportTarget
+                .FirstOrDefaultAsync(m => m.TargetId == id);
+            if (reportTarget == null)
             {
                 return NotFound();
             }
 
-            return View(ranking);
+            return View(reportTarget);
         }
 
-        // POST: Rankings/Delete/5
+        // POST: ReportTargets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid? id)
         {
-            if (_context.Ranking == null)
+            if (_context.ReportTarget == null)
             {
-                return Problem("Entity set 'AuthContext.Ranking'  is null.");
+                return Problem("Entity set 'AuthContext.ReportTarget'  is null.");
             }
-            var ranking = await _context.Ranking.FindAsync(id);
-            if (ranking != null)
+            var reportTarget = await _context.ReportTarget.FindAsync(id);
+            if (reportTarget != null)
             {
-                _context.Ranking.Remove(ranking);
+                _context.ReportTarget.Remove(reportTarget);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RankingExists(Guid? id)
+        private bool ReportTargetExists(Guid? id)
         {
-            return (_context.Ranking?.Any(e => e.RankId == id)).GetValueOrDefault();
+          return (_context.ReportTarget?.Any(e => e.TargetId == id)).GetValueOrDefault();
         }
     }
 }

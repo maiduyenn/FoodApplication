@@ -31,6 +31,7 @@ public class AuthContext : IdentityDbContext<ApplicationUser>
     public DbSet<OrderDetailModel>? OrderDetails { get; set; }
     public DbSet<UserRank>? UserRank { get; set; }
     public DbSet<FoodApplication.Models.Ranking>? Ranking { get; set; }
+    public DbSet<FoodApplication.Models.ReportTarget>? ReportTarget { get; set; }
 }
 
 public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>

@@ -34,6 +34,7 @@ namespace FoodApplication.Services
             {
                 await SaveOrderDetail(arg, order);
             }
+
             if (_context.UserRank.Any(c => c.UserId.ToString() == currentUser.Id))
             {
                 var existingRank = await _context.UserRank.FirstOrDefaultAsync(c => c.UserId.ToString() == currentUser.Id);
@@ -43,11 +44,16 @@ namespace FoodApplication.Services
             }
             else
             {
-                var rank = CheckRank(arg.TotalPrice);
-                await _context.AddAsync(new UserRank { UserId = new Guid(currentUser.Id), TotalSpent = arg.TotalPrice, RankId = rank.Result.RankId });
+                var rank = await CheckRank(arg.TotalPrice);
+                await _context.AddAsync(new UserRank { UserId = new Guid(currentUser.Id), TotalSpent = arg.TotalPrice, RankId = rank.RankId, RankName = rank.RankName, Discount = rank.Discount, UserName = currentUser.UserName });
             }
             await _context.SaveChangesAsync();
             return order;
+        }
+
+        public decimal? Normalize(decimal? value)
+        {
+            return value / 1.000000000000000000000000000000000m;
         }
 
         private async Task SaveOrderDetail(OrderRequest arg, OrderModel orderModel)
@@ -90,6 +96,8 @@ namespace FoodApplication.Services
             {
                 item.Product = await _context.FindAsync<Product>(item.ProductId);
             }
+            var discount = (double)oderResponse.Discount / 100;
+            oderResponse.Total = Normalize(oderResponse.Total - (oderResponse.Total * (decimal)discount));
             return oderResponse;
         }
 
@@ -124,23 +132,23 @@ namespace FoodApplication.Services
         }
 
 
-        //public async Task<List<RankingResponse>> GetRanks()
-        //{
-        //    return await _context.Ranks.OrderByDescending(c => c.Rank).Select(c => new RankingResponse(c)).ToListAsync();
-        //}
+        public async Task<List<RankingResponse>> GetRanks()
+        {
+            return await _context.UserRank.OrderByDescending(c => c.Value).Select(c => new RankingResponse(c)).ToListAsync();
+        }
 
-        //public async Task<double> Discount(string id)
-        //{
-        //    try
-        //    {
-        //        var rank = await _context.Ranks.FirstAsync(c => c.UserId == id);
-        //        return rank.GetDiscount();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return 0;
-        //    }
-        //}
+        public async Task<double> Discount(string id)
+        {
+            try
+            {
+                var rank = await _context.UserRank.FirstAsync(c => c.UserId == new Guid(id));
+                return rank.Discount.Value;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
 
 
     }

@@ -7,5 +7,6 @@ namespace FoodApplication.Interface
     public interface IReportService
     {
         Task<List<OrderResponse>> GetOrders();
+        Task<ReportTarget> GetTarget();
     }
 }

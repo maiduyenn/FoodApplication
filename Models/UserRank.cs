@@ -8,6 +8,7 @@ namespace FoodApplication.Models
         public int UserRankId { get; set; }
         public Guid? RankId { get; set; }
         public Guid? UserId { get; set; }
+        public string? UserName { get; set; }
         public string? RankName { get; set; }
         public string? Value { get; set; }
         public double? Discount { get; set; }
@@ -23,7 +24,7 @@ namespace FoodApplication.Models
         public string? Value { get; set; }
         public double? Discount { get; set; }
         public decimal? TotalSpent { get; set; }
-
+        public string? UserName { get; set; }
 
         public RankingResponse(UserRank rank)
         {
@@ -34,6 +35,7 @@ namespace FoodApplication.Models
             Value = rank.Value;
             Discount = rank.Discount;
             TotalSpent = rank.TotalSpent;
+            UserName = rank.UserName;
         }
     }
 }

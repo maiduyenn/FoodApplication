@@ -10,5 +10,7 @@ namespace FoodApplication.Interface
         Task<List<OrderModel>> GetOrdersByUser(ApplicationUser user);
         Task<List<OrderModel>> GetAllOrders();
         Task<OrderResponse> GetOrderById(string id);
+        Task<List<RankingResponse>> GetRanks();
+        Task<double> Discount(string id);
     }
 }

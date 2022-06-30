@@ -77,6 +77,9 @@ namespace FoodApplication.Utilities
                 new Ranking { RankId = new Guid("2b5e174e-3b0e-446f-86af-483d56fd7210"), RankName = "Broze", Discount = 5, Value = 0, TotalSpent = 100 },
                 new Ranking { RankId = new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"), RankName = "Silver", Discount = 10, Value = 1, TotalSpent = 200 },
                 new Ranking { RankId = new Guid("2d5e174e-3b0e-446f-86af-483d56fd7210"), RankName = "Gold", Discount = 20, Value = 2, TotalSpent = 300 });
+
+            modelBuilder.Entity<ReportTarget>().HasData(
+                new ReportTarget { TargetId = new Guid("2d5e174e-3b0e-446f-86af-483d56fd8210"), Target = 2000 });
         }
     }
 }

@@ -1,12 +1,12 @@
-﻿@*@model IEnumerable<FoodApplication.Models.RankingResponse>
+﻿@model IEnumerable<FoodApplication.Models.RankingResponse>
 @{
     ViewData["Title"] = "Ranking";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    Dictionary<Rank, string> listBages = new Dictionary<Rank, string>
+    Dictionary<string, string> listBages = new Dictionary<string, string>
     {
-      {Rank.Broze,"bg-success" },
-      {Rank.Silver,"bg-primary" },
-      {Rank.Gold,"bg-warning" },
+      {"Broze","bg-success" },
+      {"Silver","bg-primary" },
+      {"Gold","bg-warning" },
     };
 }
 
@@ -23,6 +23,7 @@
                                 <th class="text-start" scope="col">Email</th>
                                 <th class="text-start" scope="col">Spent Money</th>
                                 <th class="text-start" scope="col">Rank</th>
+                                <th class="text-start" scope="col">Discount</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,8 +31,9 @@
                             {
                                 <tr>
                                     <td>@item.UserName</td>
-                                    <td>$@item.SpentMoney</td>
-                                    <td><span class="badge @listBages[item.Rank]">@item.Rank</span></td>
+                                    <td>$@item.TotalSpent</td>
+                                    <td><span class="badge @listBages[item.RankName]">@item.RankName</span></td>
+                                    <td>@item.Discount %</td>
                                 </tr>
                             }
                         </tbody>
@@ -41,4 +43,3 @@
         </div>
     </div>
 </div>
-*@

@@ -44,6 +44,8 @@ namespace FoodApplication.Models
         public double? Discount { get; set; }
         public virtual ICollection<OrderDetailResponse> OrderDetails { get; set; }
 
+     
+
         public OrderResponse(OrderModel order)
         {
             OrderId = order.OrderId;

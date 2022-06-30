@@ -36,10 +36,18 @@ namespace FoodApplication.Controllers
             {
                 Months[item.Key] = item.Count();
             }
+            var target = await _reportService.GetTarget();
+
             ViewBag.Revenues = total;
+            ViewBag.Target = Normalize(target.Target);
             ViewBag.Goals = ((total / 5000) * 100).ToString("N2");
             ViewData["listdata"] = Months;
             return View();
+        }
+
+        public decimal? Normalize(decimal? value)
+        {
+            return value / 1.000000000000000000000000000000000m;
         }
     }
 }
